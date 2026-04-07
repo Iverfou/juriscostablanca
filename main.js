@@ -207,20 +207,20 @@ const translations = {
 };
 
 // ===== LANGUE ACTIVE =====
-let currentLang = 'es';
+window.currentLang = 'es';
 
 function setLang(lang) {
-  currentLang = lang;
-  
+  window.currentLang = lang;
+
   // Mettre à jour les boutons
-  document.querySelectorAll('.lang-btn').forEach(btn => {
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
     btn.classList.remove('active');
   });
   event.target.classList.add('active');
 
   // Mettre à jour les textes
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
     if (translations[lang] && translations[lang][key]) {
       el.textContent = translations[lang][key];
     }
@@ -229,70 +229,86 @@ function setLang(lang) {
   // Mettre à jour l'attribut lang du HTML
   document.documentElement.lang = lang;
 
-   // Mettre à jour le message de bienvenue du chat
-  var messages = document.getElementById('jcb-chat-messages');
-  if (messages && messages.children.length === 1) {
-    // Seulement si c'est encore le message de bienvenue
-    messages.innerHTML = '';
-    var div = document.createElement('div');
-    div.className = 'jcb-message jcb-message-bot';
-    div.textContent = welcomeMessages[lang] || welcomeMessages.es;
-    messages.appendChild(div);
+  // Mettre à jour le titre et subtitle du chat
+  var chatTitle = document.getElementById('jcb-chat-title');
+  var chatSubtitle = document.getElementById('jcb-chat-subtitle');
+  var chatInput = document.getElementById('jcb-chat-input');
 
-    if (typeof showWelcomeMessage === 'function') {
-  showWelcomeMessage();
-}
+  var chatTitles = {
+    es: "Asistente Jurídico IA",
+    en: "Legal AI Assistant",
+    fr: "Assistant Juridique IA"
+  };
+
+  var chatSubtitles = {
+    es: "Responde en 7 idiomas · 24h/24",
+    en: "Answers in 7 languages · 24/7",
+    fr: "Répond en 7 langues · 24h/24"
+  };
+
+  var placeholders = {
+    es: "Escriba su pregunta...",
+    en: "Type your question...",
+    fr: "Écrivez votre question..."
+  };
+
+  if (chatTitle) chatTitle.textContent = chatTitles[lang] || chatTitles.es;
+  if (chatSubtitle) chatSubtitle.textContent = chatSubtitles[lang] || chatSubtitles.es;
+  if (chatInput) chatInput.placeholder = placeholders[lang] || placeholders.es;
+
+  // Mettre à jour le message de bienvenue si c'est le seul message
+  if (typeof showWelcomeMessage === 'function') {
+    var messages = document.getElementById('jcb-chat-messages');
+    if (messages && messages.children.length <= 1) {
+      messages.innerHTML = '';
+      showWelcomeMessage();
+    }
   }
-  
-  // Mettre à jour placeholder
-  var input = document.getElementById('jcb-chat-input');
-  if (input) input.placeholder = placeholders[lang] || placeholders.es;
 }
 
 // ===== HAMBURGER MENU =====
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
+var hamburger = document.getElementById('hamburger');
+var navLinks = document.getElementById('navLinks');
 
-hamburger.addEventListener('click', () => {
+hamburger.addEventListener('click', function() {
   navLinks.classList.toggle('open');
 });
 
-// Fermer le menu au clic sur un lien
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
+navLinks.querySelectorAll('a').forEach(function(link) {
+  link.addEventListener('click', function() {
     navLinks.classList.remove('open');
   });
 });
 
 // ===== SCROLL ANIMATIONS =====
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
     }
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.reveal').forEach(el => {
+document.querySelectorAll('.reveal').forEach(function(el) {
   observer.observe(el);
 });
 
 // ===== NAVIGATION ACTIVE =====
-const sections = document.querySelectorAll('section[id]');
+var sections = document.querySelectorAll('section[id]');
 
-window.addEventListener('scroll', () => {
-  const scrollY = window.pageYOffset;
-  
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - 100;
-    const sectionHeight = section.offsetHeight;
-    const sectionId = section.getAttribute('id');
-    
+window.addEventListener('scroll', function() {
+  var scrollY = window.pageYOffset;
+
+  sections.forEach(function(section) {
+    var sectionTop = section.offsetTop - 100;
+    var sectionHeight = section.offsetHeight;
+    var sectionId = section.getAttribute('id');
+
     if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-      document.querySelectorAll('.nav-links a').forEach(link => {
+      document.querySelectorAll('.nav-links a').forEach(function(link) {
         link.style.color = '';
       });
-      const activeLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
+      var activeLink = document.querySelector('.nav-links a[href="#' + sectionId + '"]');
       if (activeLink) {
         activeLink.style.color = 'var(--beige-dore)';
       }
@@ -301,10 +317,10 @@ window.addEventListener('scroll', () => {
 });
 
 // ===== SMOOTH SCROLL =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
   anchor.addEventListener('click', function(e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+    var target = document.querySelector(this.getAttribute('href'));
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -312,13 +328,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ===== FORM SUBMIT =====
-document.querySelector('.btn-primary[data-i18n="form_submit"]')?.addEventListener('click', () => {
-  const messages = {
-    es: '✅ Solicitud enviada. Le contactaremos en 24h.',
-    en: '✅ Request sent. We will contact you within 24h.',
-    fr: '✅ Demande envoyée. Nous vous contacterons sous 24h.'
-  };
-  alert(messages[currentLang] || messages.es);
-});
+var submitBtn = document.querySelector('.btn-primary[data-i18n="form_submit"]');
+if (submitBtn) {
+  submitBtn.addEventListener('click', function() {
+    var messages = {
+      es: '✅ Solicitud enviada. Le contactaremos en 24h.',
+      en: '✅ Request sent. We will contact you within 24h.',
+      fr: '✅ Demande envoyée. Nous vous contacterons sous 24h.'
+    };
+    alert(messages[window.currentLang] || messages.es);
+  });
+}
 
 console.log('🌐 Juris Costa Blanca — Powered by IA · Alicante 2026');
