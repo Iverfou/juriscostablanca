@@ -27,7 +27,7 @@ const chatSubtitles = {
 };
 
 function createChatWidget() {
-  const widget = document.createElement('div');
+  var widget = document.createElement('div');
   widget.id = 'jcb-chat-widget';
   widget.innerHTML = `
     <button id="jcb-chat-toggle" aria-label="Ouvrir le chat IA">
@@ -87,7 +87,7 @@ function createChatWidget() {
 }
 
 function injectChatStyles() {
-  const style = document.createElement('style');
+  var style = document.createElement('style');
   style.textContent = `
     #jcb-chat-widget { position: fixed; bottom: 100px; left: 30px; z-index: 9999; font-family: 'Cormorant Garamond', 'Georgia', serif; }
     #jcb-chat-toggle { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #1B2A4A, #2E4A7A); border: 2px solid rgba(201,169,110,0.5); color: #F5F0E8; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 30px rgba(27,42,74,0.5); transition: all 0.3s; position: relative; }
@@ -131,14 +131,14 @@ function injectChatStyles() {
 }
 
 function initChatEvents() {
-  const toggle = document.getElementById('jcb-chat-toggle');
-  const chatWindow = document.getElementById('jcb-chat-window');
-  const closeBtn = document.getElementById('jcb-chat-close');
-  const sendBtn = document.getElementById('jcb-chat-send');
-  const input = document.getElementById('jcb-chat-input');
-  const iconOpen = document.getElementById('jcb-chat-icon-open');
-  const iconClose = document.getElementById('jcb-chat-icon-close');
-  let isOpen = false;
+  var toggle = document.getElementById('jcb-chat-toggle');
+  var chatWindow = document.getElementById('jcb-chat-window');
+  var closeBtn = document.getElementById('jcb-chat-close');
+  var sendBtn = document.getElementById('jcb-chat-send');
+  var input = document.getElementById('jcb-chat-input');
+  var iconOpen = document.getElementById('jcb-chat-icon-open');
+  var iconClose = document.getElementById('jcb-chat-icon-close');
+  var isOpen = false;
 
   toggle.addEventListener('click', function() {
     isOpen = !isOpen;
@@ -192,10 +192,10 @@ function addMessage(text, type) {
   var div = document.createElement('div');
   div.className = 'jcb-message jcb-message-' + type;
   div.innerHTML = text
-  .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-  .replace(/### (.+)/g, '<strong>$1</strong>')
-  .replace(/## (.+)/g, '<strong>$1</strong>')
-  .replace(/\n/g, '<br>');
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/### (.+)/g, '<strong>$1</strong>')
+    .replace(/## (.+)/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
   messages.appendChild(div);
   messages.scrollTop = messages.scrollHeight;
   return div;
@@ -216,8 +216,6 @@ function hideTyping() {
   if (typing) typing.remove();
 }
 
-// Parse le format NDJSON streaming de n8n
-// n8n envoie plusieurs lignes JSON : {"type":"begin",...} {"type":"item","content":"..."} {"type":"end",...}
 function parseN8NResponse(rawText) {
   var lines = rawText.trim().split('\n');
   var fullContent = '';
@@ -228,34 +226,19 @@ function parseN8NResponse(rawText) {
 
     try {
       var obj = JSON.parse(line);
-
-      // Type "item" contient le contenu du message
       if (obj.type === 'item' && obj.content) {
         fullContent += obj.content;
       }
-
-      // Certaines versions de n8n utilisent "message" directement
-      if (obj.output) {
-        return obj.output;
-      }
-      if (obj.text) {
-        return obj.text;
-      }
-      if (obj.message && typeof obj.message === 'string') {
-        return obj.message;
-      }
-
+      if (obj.output) return obj.output;
+      if (obj.text) return obj.text;
+      if (obj.message && typeof obj.message === 'string') return obj.message;
     } catch (e) {
-      // Ligne non-JSON, on ignore
+      // ligne non-JSON ignorée
     }
   }
 
-  // Si on a accumulé du contenu via les chunks "item"
-  if (fullContent) {
-    return fullContent;
-  }
+  if (fullContent) return fullContent;
 
-  // Essai de parser tout le texte comme un seul JSON
   try {
     var single = JSON.parse(rawText);
     return single.output || single.text || single.message || rawText;
@@ -292,8 +275,6 @@ async function sendMessage() {
     hideTyping();
 
     var rawText = await response.text();
-    console.log('n8n raw response:', rawText);
-
     var botReply = parseN8NResponse(rawText);
 
     if (!botReply || botReply.trim() === '') {
