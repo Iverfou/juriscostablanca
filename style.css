@@ -127,15 +127,15 @@ nav {
 
 .lang-selector {
   display: flex;
-  gap: 8px;
+  gap: 5px;
 }
 
 .lang-btn {
   background: transparent;
   border: 1px solid rgba(201, 169, 110, 0.4);
   color: var(--beige-clair);
-  padding: 4px 10px;
-  font-size: 11px;
+  padding: 3px 7px;
+  font-size: 10px;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s;
@@ -986,7 +986,7 @@ footer {
   }
 
   .lang-selector {
-    display: none;
+    display: flex;
   }
 }
 
