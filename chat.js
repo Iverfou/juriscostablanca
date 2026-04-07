@@ -210,6 +210,54 @@ function hideTyping() {
   if (typing) typing.remove();
 }
 
+// Parse le format NDJSON streaming de n8n
+// n8n envoie plusieurs lignes JSON : {"type":"begin",...} {"type":"item","content":"..."} {"type":"end",...}
+function parseN8NResponse(rawText) {
+  var lines = rawText.trim().split('\n');
+  var fullContent = '';
+
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i].trim();
+    if (!line) continue;
+
+    try {
+      var obj = JSON.parse(line);
+
+      // Type "item" contient le contenu du message
+      if (obj.type === 'item' && obj.content) {
+        fullContent += obj.content;
+      }
+
+      // Certaines versions de n8n utilisent "message" directement
+      if (obj.output) {
+        return obj.output;
+      }
+      if (obj.text) {
+        return obj.text;
+      }
+      if (obj.message && typeof obj.message === 'string') {
+        return obj.message;
+      }
+
+    } catch (e) {
+      // Ligne non-JSON, on ignore
+    }
+  }
+
+  // Si on a accumulé du contenu via les chunks "item"
+  if (fullContent) {
+    return fullContent;
+  }
+
+  // Essai de parser tout le texte comme un seul JSON
+  try {
+    var single = JSON.parse(rawText);
+    return single.output || single.text || single.message || rawText;
+  } catch (e) {
+    return rawText;
+  }
+}
+
 async function sendMessage() {
   var input = document.getElementById('jcb-chat-input');
   var text = input.value.trim();
@@ -238,19 +286,12 @@ async function sendMessage() {
     hideTyping();
 
     var rawText = await response.text();
-    var botReply;
+    console.log('n8n raw response:', rawText);
 
-    try {
-      var data = JSON.parse(rawText);
-      botReply = data.output
-        || data.text
-        || data.message
-        || data.response
-        || (Array.isArray(data) && data[0] && data[0].output)
-        || (Array.isArray(data) && data[0] && data[0].text)
-        || rawText;
-    } catch (parseErr) {
-      botReply = rawText || "Erreur de réponse.";
+    var botReply = parseN8NResponse(rawText);
+
+    if (!botReply || botReply.trim() === '') {
+      botReply = welcomeMessages[window.currentLang || 'es'];
     }
 
     addMessage(botReply, 'bot');
