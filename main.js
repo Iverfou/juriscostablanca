@@ -238,6 +238,10 @@ function setLang(lang) {
     div.className = 'jcb-message jcb-message-bot';
     div.textContent = welcomeMessages[lang] || welcomeMessages.es;
     messages.appendChild(div);
+
+    if (typeof showWelcomeMessage === 'function') {
+  showWelcomeMessage();
+}
   }
   
   // Mettre à jour placeholder
