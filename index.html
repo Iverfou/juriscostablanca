@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juris Costa Blanca — Gestoría Jurídica Internacional · Alicante</title>
+  <meta name="description" content="Gestoría jurídica especializada en inmigración internacional. Servicios en español, inglés, francés, árabe, chino, ucraniano y ruso. Alicante, España." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#accueil" class="nav-logo">
+      <div class="nav-logo-icon">J</div>
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">Juris Costa Blanca</span>
+        <span class="nav-logo-sub">Gestoría Jurídica · Alicante</span>
+      </div>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#accueil" data-i18n="nav_accueil">Inicio</a></li>
+      <li><a href="#bureau" data-i18n="nav_bureau">Nuestro Equipo</a></li>
+      <li><a href="#activites" data-i18n="nav_activites">Servicios</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
+    </ul>
+
+    <div class="lang-selector">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section id="accueil">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-lines"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span data-i18n="hero_eyebrow">Gestoría Jurídica Internacional</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span data-i18n="hero_title1">Haz de Alicante</span><br>
+        <em data-i18n="hero_title2">tu nuevo destino</em>
+      </h1>
+
+      <p class="hero-accroche" data-i18n="hero_accroche">
+        Où que vous veniez, nous parlons votre langue.
+      </p>
+
+      <p class="hero-description" data-i18n="hero_description">
+        Acompañamos a personas y empresas internacionales en todos sus trámites de inmigración, residencia y establecimiento en España. Un equipo multicultural, multilingüe, a su servicio en Alicante.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary" data-i18n="hero_cta1">
+          ✦ Consulta Gratuita
+        </a>
+        <a href="https://wa.me/14155238886" target="_blank" class="btn-secondary" data-i18n="hero_cta2">
+          ◎ WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-number">7+</div>
+        <div class="hero-stat-label" data-i18n="stat_langues">Idiomas</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">4</div>
+        <div class="hero-stat-label" data-i18n="stat_gestionnaires">Gestores</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">24/7</div>
+        <div class="hero-stat-label" data-i18n="stat_disponible">Asistente IA</div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span data-i18n="hero_scroll">Descubrir</span>
+    </div>
+  </section>
+
+  <!-- BARRE LANGUES -->
+  <div class="langues-bar">
+    <div class="langue-item"><span class="langue-flag">🇪🇸</span> Español</div>
+    <div class="langue-sep">·</div>
+    <div class="langue-item"><span class="langue-flag">🇬🇧</span> English</div>
+    <div class="langue-sep">·</div>
+    <div class="langue-item"><span class="langue-flag">🇫🇷</span> Français</div>
+    <div class="langue-sep">·</div>
+    <div class="langue-item"><span class="langue-flag">🇲🇦</span> العربية</div>
+    <div class="langue-sep">·</div>
+    <div class="langue-item"><span class="langue-flag">🇨🇳</span> 中文</div>
+    <div class="langue-sep">·</div>
+    <div class="langue-item"><span class="langue-flag">🇺🇦</span> Українська</div>
+    <div class="langue-sep">·</div>
+    <div class="langue-item"><span class="langue-flag">🇷🇺</span> Русский</div>
+  </div>
+
+  <!-- NOTRE BUREAU -->
+  <section id="bureau">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span data-i18n="bureau_eyebrow">Nuestro Equipo</span>
+        <div class="section-eyebrow-line"></div>
+      </div>
+      <h2 class="section-title" data-i18n="bureau_title">Des experts pour chaque région du monde</h2>
+      <p class="section-subtitle" data-i18n="bureau_subtitle">
+        Chaque gestionnaire est spécialisé dans sa région et parle la langue de ses clients.
+      </p>
+    </div>
+
+    <div class="team-grid">
+
+      <div class="team-card reveal">
+        <div class="team-avatar avatar-javier">JG</div>
+        <div class="team-region" data-i18n="javier_region">América Latina · Norteamérica</div>
+        <h3 class="team-name">Javier González</h3>
+        <p class="team-role" data-i18n="javier_role">
+          Gestión de inmigración para clientes hispanohablantes y angloparlantes de América Latina y fuera de Quebec.
+        </p>
+        <div class="team-langues">
+          <span class="langue-tag">🇪🇸 Español</span>
+          <span class="langue-tag">🇬🇧 English</span>
+        </div>
+        <a href="https://wa.me/14155238886?text=Hola%20Javier%2C%20necesito%20informaci%C3%B3n%20sobre%20inmigraci%C3%B3n" target="_blank" class="team-whatsapp">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+
+      <div class="team-card reveal">
+        <div class="team-avatar avatar-wahil">WT</div>
+        <div class="team-region" data-i18n="wahil_region">Afrique · Maghreb · Moyen-Orient</div>
+        <h3 class="team-name">Wahil Toubal</h3>
+        <p class="team-role" data-i18n="wahil_role">
+          Accompagnement des clients africains et maghrébins dans leurs démarches d'immigration et de résidence en Espagne.
+        </p>
+        <div class="team-langues">
+          <span class="langue-tag">🇫🇷 Français</span>
+          <span class="langue-tag">🇲🇦 العربية</span>
+        </div>
+        <a href="https://wa.me/14155238886?text=Bonjour%20Wahil%2C%20j%27ai%20besoin%20d%27informations%20sur%20l%27immigration" target="_blank" class="team-whatsapp">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+
+      <div class="team-card reveal">
+        <div class="team-avatar avatar-stefania">SV</div>
+        <div class="team-region" data-i18n="stefania_region">Ukraine · Russie · Europe de l'Est</div>
+        <h3 class="team-name">Stefania Verslova</h3>
+        <p class="team-role" data-i18n="stefania_role">
+          Специализируется на иммиграционных процедурах для украинских и русскоязычных клиентов в Испании.
+        </p>
+        <div class="team-langues">
+          <span class="langue-tag">🇺🇦 Українська</span>
+          <span class="langue-tag">🇷🇺 Русский</span>
+        </div>
+        <a href="https://wa.me/14155238886?text=Hello%2C%20I%20need%20information%20about%20immigration" target="_blank" class="team-whatsapp">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+
+      <div class="team-card reveal">
+        <div class="team-avatar avatar-celine">CB</div>
+        <div class="team-region" data-i18n="celine_region">France · Québec · Belgique · Suisse</div>
+        <h3 class="team-name">Céline Bouchard</h3>
+        <p class="team-role" data-i18n="celine_role">
+          Spécialisée dans l'accompagnement des clients francophones de France, du Québec et de la Belgique pour leur installation en Espagne.
+        </p>
+        <div class="team-langues">
+          <span class="langue-tag">🇫🇷 Français</span>
+          <span class="langue-tag">🇪🇸 Español</span>
+        </div>
+        <a href="https://wa.me/14155238886?text=Bonjour%20C%C3%A9line%2C%20j%27ai%20besoin%20d%27informations%20sur%20l%27immigration" target="_blank" class="team-whatsapp">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ACTIVITÉS -->
+  <section id="activites">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span data-i18n="activites_eyebrow">Nos Services</span>
+        <div class="section-eyebrow-line"></div>
+      </div>
+      <h2 class="section-title" data-i18n="activites_title">Nos domaines d'expertise</h2>
+      <p class="section-subtitle" data-i18n="activites_subtitle">
+        Contactez-nous pour plus d'informations sur chaque service.
+      </p>
+    </div>
+
+    <div class="activites-grid">
+
+      <div class="activite-card reveal">
+        <div class="activite-icon">📋</div>
+        <h3 class="activite-title" data-i18n="act1_title">Régularisation 2026</h3>
+        <p class="activite-desc" data-i18n="act1_desc">
+          Proceso extraordinario de regularización para personas sin papeles en España. Solicitudes hasta el 30 de junio de 2026.
+        </p>
+        <div class="activite-contact" data-i18n="act_contact">Contactar para más información</div>
+      </div>
+
+      <div class="activite-card reveal">
+        <div class="activite-icon">🪪</div>
+        <h3 class="activite-title" data-i18n="act2_title">NIE / TIE</h3>
+        <p class="activite-desc" data-i18n="act2_desc">
+          Obtención y renovación del Número de Identidad de Extranjero y la Tarjeta de Identidad de Extranjero.
+        </p>
+        <div class="activite-contact" data-i18n="act_contact">Contactar para más información</div>
+      </div>
+
+      <div class="activite-card reveal">
+        <div class="activite-icon">🎓</div>
+        <h3 class="activite-title" data-i18n="act3_title">Visa Étudiant</h3>
+        <p class="activite-desc" data-i18n="act3_desc">
+          Nuevo reglamento en vigor desde mayo 2025. Autorización por duración total de estudios con permiso de trabajo incluido.
+        </p>
+        <div class="activite-contact" data-i18n="act_contact">Contactar para más información</div>
+      </div>
+
+      <div class="activite-card reveal">
+        <div class="activite-icon">👨‍👩‍👧</div>
+        <h3 class="activite-title" data-i18n="act4_title">Regroupement Familial</h3>
+        <p class="activite-desc" data-i18n="act4_desc">
+          Reagrupación familiar para residentes en España. Tramitación para cónyuge, hijos y familiares dependientes.
+        </p>
+        <div class="activite-contact" data-i18n="act_contact">Contactar para más información</div>
+      </div>
+
+      <div class="activite-card reveal">
+        <div class="activite-icon">🏠</div>
+        <h3 class="activite-title" data-i18n="act5_title">Arraigo</h3>
+        <p class="activite-desc" data-i18n="act5_desc">
+          Arraigo social, laboral, familiar y de segunda oportunidad. Periodos reducidos a 2 años con el nuevo reglamento.
+        </p>
+        <div class="activite-contact" data-i18n="act_contact">Contactar para más información</div>
+      </div>
+
+      <div class="activite-card reveal">
+        <div class="activite-icon">🔄</div>
+        <h3 class="activite-title" data-i18n="act6_title">Renouvellement de Résidence</h3>
+        <p class="activite-desc" data-i18n="act6_desc">
+          Renovación de autorizaciones de residencia y trabajo. Seguimiento y gestión completa del expediente.
+        </p>
+        <div class="activite-contact" data-i18n="act_contact">Contactar para más información</div>
+      </div>
+
+      <div class="activite-card reveal">
+        <div class="activite-icon">🏢</div>
+        <h3 class="activite-title" data-i18n="act7_title">Immigration Commerciale</h3>
+        <p class="activite-desc" data-i18n="act7_desc">
+          Establecimiento de empresas, inversiones y permisos de residencia para emprendedores e inversores internacionales.
+        </p>
+        <div class="activite-contact" data-i18n="act_contact">Contactar para más información</div>
+      </div>
+
+      <div class="activite-card reveal">
+        <div class="activite-icon">🌍</div>
+        <h3 class="activite-title" data-i18n="act8_title">Visa Entrepreneur</h3>
+        <p class="activite-desc" data-i18n="act8_desc">
+          Visado para emprendedores y startups. Acceso al ecosistema tecnológico y empresarial español desde Alicante.
+        </p>
+        <div class="activite-contact" data-i18n="act_contact">Contactar para más información</div>
+      </div>
+
+      <div class="activite-card reveal" style="border-color: rgba(201,169,110,0.4); background: rgba(201,169,110,0.06);">
+        <div class="activite-icon">🤖</div>
+        <h3 class="activite-title" data-i18n="act9_title">Asistente IA 24/7</h3>
+        <p class="activite-desc" data-i18n="act9_desc">
+          Notre assistant IA répond à vos questions en 7 langues, 24h/24. Disponible sur WhatsApp et sur ce site.
+        </p>
+        <div class="activite-contact" data-i18n="act9_contact">Disponible maintenant via WhatsApp</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span data-i18n="contact_eyebrow">Contacto</span>
+        <div class="section-eyebrow-line"></div>
+      </div>
+      <h2 class="section-title" data-i18n="contact_title">Prenons rendez-vous</h2>
+      <p class="section-subtitle" data-i18n="contact_subtitle">
+        Notre équipe vous répond dans votre langue dans les plus brefs délais.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3 data-i18n="contact_info_title">Juris Costa Blanca</h3>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div class="contact-item-content">
+            <h4 data-i18n="contact_adresse">Adresse</h4>
+            <p>Calle Mayor 24, 2°A<br>03001 Alicante, España</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div class="contact-item-content">
+            <h4 data-i18n="contact_tel">Téléphone</h4>
+            <p>+34 965 123 456</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">✉️</div>
+          <div class="contact-item-content">
+            <h4>Email</h4>
+            <p>info@juriscostablanca.es</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">💬</div>
+          <div class="contact-item-content">
+            <h4>WhatsApp</h4>
+            <p>+1 415 523 8886</p>
+          </div>
+        </div>
+
+        <div class="contact-horaires">
+          <h4 data-i18n="contact_horaires">Horaires</h4>
+          <div class="horaire-row">
+            <span data-i18n="horaire_semaine">Lundi — Vendredi</span>
+            <span>9h00 — 18h00</span>
+          </div>
+          <div class="horaire-row">
+            <span data-i18n="horaire_samedi">Samedi</span>
+            <span>9h00 — 13h00</span>
+          </div>
+          <div class="horaire-row">
+            <span data-i18n="horaire_ia">Asistente IA</span>
+            <span>24h / 7j</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-section reveal">
+        <h3 data-i18n="form_title">Demande de consultation</h3>
+        <div class="form-group">
+          <label data-i18n="form_nom">Nom complet</label>
+          <input type="text" placeholder="Votre nom" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="votre@email.com" />
+        </div>
+        <div class="form-group">
+          <label>WhatsApp</label>
+          <input type="tel" placeholder="+34 6XX XXX XXX" />
+        </div>
+        <div class="form-group">
+          <label data-i18n="form_service">Service</label>
+          <select>
+            <option data-i18n="form_select">Sélectionner un service</option>
+            <option>Régularisation 2026</option>
+            <option>NIE / TIE</option>
+            <option>Visa Étudiant</option>
+            <option>Regroupement Familial</option>
+            <option>Arraigo</option>
+            <option>Renouvellement Résidence</option>
+            <option>Immigration Commerciale</option>
+            <option>Visa Entrepreneur</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form_message">Message</label>
+          <textarea placeholder="Décrivez brièvement votre situation..."></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%; justify-content:center;" data-i18n="form_submit">
+          ✦ Envoyer la demande
+        </button>
+        <p class="form-note" data-i18n="form_note">
+          * Consultation initiale gratuite de 15 minutes. Notre équipe vous contactera sous 24h.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/14155238886?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20informaci%C3%B3n%20sobre%20inmigraci%C3%B3n%20en%20Espa%C3%B1a" 
+     target="_blank" 
+     class="whatsapp-float"
+     aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    WhatsApp
+  </a>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo">
+        Juris <span>Costa Blanca</span>
+      </div>
+      <div class="footer-links">
+        <a href="#accueil" data-i18n="nav_accueil">Inicio</a>
+        <a href="#bureau" data-i18n="nav_bureau">Equipo</a>
+        <a href="#activites" data-i18n="nav_activites">Servicios</a>
+        <a href="#contact" data-i18n="nav_contact">Contacto</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Juris Costa Blanca · Alicante, España</p>
+      <p class="footer-legal">Este sitio tiene fines demostrativos. No constituye asesoramiento jurídico.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
