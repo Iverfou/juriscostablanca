@@ -189,7 +189,11 @@ function addMessage(text, type) {
   var messages = document.getElementById('jcb-chat-messages');
   var div = document.createElement('div');
   div.className = 'jcb-message jcb-message-' + type;
-  div.textContent = text;
+  div.innerHTML = text
+  .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+  .replace(/### (.+)/g, '<strong>$1</strong>')
+  .replace(/## (.+)/g, '<strong>$1</strong>')
+  .replace(/\n/g, '<br>');
   messages.appendChild(div);
   messages.scrollTop = messages.scrollHeight;
   return div;
