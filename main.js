@@ -228,6 +228,21 @@ function setLang(lang) {
 
   // Mettre à jour l'attribut lang du HTML
   document.documentElement.lang = lang;
+
+   // Mettre à jour le message de bienvenue du chat
+  var messages = document.getElementById('jcb-chat-messages');
+  if (messages && messages.children.length === 1) {
+    // Seulement si c'est encore le message de bienvenue
+    messages.innerHTML = '';
+    var div = document.createElement('div');
+    div.className = 'jcb-message jcb-message-bot';
+    div.textContent = welcomeMessages[lang] || welcomeMessages.es;
+    messages.appendChild(div);
+  }
+  
+  // Mettre à jour placeholder
+  var input = document.getElementById('jcb-chat-input');
+  if (input) input.placeholder = placeholders[lang] || placeholders.es;
 }
 
 // ===== HAMBURGER MENU =====
