@@ -182,6 +182,8 @@ function initChatEvents() {
 function showWelcomeMessage() {
   var lang = window.currentLang || 'es';
   var msg = welcomeMessages[lang] || welcomeMessages.es;
+  var messages = document.getElementById('jcb-chat-messages');
+  if (messages) messages.innerHTML = '';
   addMessage(msg, 'bot');
 }
 
