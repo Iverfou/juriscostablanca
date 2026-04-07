@@ -549,6 +549,8 @@ async function sendMessage() {
     }
 
     const text_response = await response.text();
+
+    const text_response = await response.text();
 let botReply;
 try {
   const data = JSON.parse(text_response);
