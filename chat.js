@@ -535,9 +535,11 @@ async function sendMessage() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        chatInput: text,
-        sessionId: SESSION_ID,
-        action: 'sendMessage'
+  action: 'sendMessage',
+  sessionId: SESSION_ID,
+  chatInput: text,
+  type: 'human'
+})
       })
     });
 
@@ -550,13 +552,12 @@ async function sendMessage() {
     const data = await response.json();
     
     // Extraire la réponse selon la structure n8n
-    const botReply = data.output 
-      || data.text 
-      || data.message 
-      || data.response
-      || (data[0] && data[0].output)
-      || (data[0] && data[0].text)
-      || "Je suis désolé, une erreur s'est produite. Veuillez réessayer.";
+const botReply = data.output 
+  || data.text
+  || data.message
+  || (Array.isArray(data) && data[0]?.output)
+  || (Array.isArray(data) && data[0]?.text)
+  || "Erreur de connexion.";
 
     addMessage(botReply, 'bot');
 
