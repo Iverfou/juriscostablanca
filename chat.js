@@ -548,17 +548,19 @@ async function sendMessage() {
       throw new Error('Erreur réseau');
     }
 
-    const data = await response.json();
+    const text_response = await response.text();
+let botReply;
+try {
+  const data = JSON.parse(text_response);
+  botReply = data.output
+    || data.text
+    || data.message
+    || (Array.isArray(data) && data[0] && data[0].output)
+    || "Erreur de réponse.";
+} catch(e) {
+  botReply = text_response || "Erreur de connexion.";
+}
 
-    const botReply = data.output
-      || data.text
-      || data.message
-      || data.response
-      || (Array.isArray(data) && data[0] && data[0].output)
-      || (Array.isArray(data) && data[0] && data[0].text)
-      || "Je suis désolé, une erreur s'est produite. Veuillez réessayer.";
-
-    addMessage(botReply, 'bot');
 
   } catch (error) {
     hideTyping();
