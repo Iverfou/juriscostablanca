@@ -1,5 +1,5 @@
 // ===== JURIS COSTA BLANCA — WIDGET CHAT IA =====
-const N8N_WEBHOOK_URL = 'https://kenzel2122.app.n8n.cloud/webhook/71fbff38-e113-4401-a344-5f731c87f1fd/chat';
+const N8N_WEBHOOK_URL = 'https://kenzel2122.app.n8n.cloud/webhook/65aecf7f-612d-4315-a5a2-1b5edf06b6e0';
 const SESSION_ID = 'session_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
 
 const welcomeMessages = {
