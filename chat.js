@@ -219,19 +219,8 @@ function hideTyping() {
 function parseN8NResponse(rawText) {
   try {
     var data = JSON.parse(rawText);
-    return data.reply || data.output || data.text || '';
+    return data.reply || data.output || data.text || data.message || '';
   } catch(e) {
-    return rawText;
-  }
-}
-  }
-
-  if (fullContent) return fullContent;
-
-  try {
-    var single = JSON.parse(rawText);
-    return single.output || single.text || single.message || rawText;
-  } catch (e) {
     return rawText;
   }
 }
