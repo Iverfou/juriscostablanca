@@ -217,24 +217,13 @@ function hideTyping() {
 }
 
 function parseN8NResponse(rawText) {
-  var lines = rawText.trim().split('\n');
-  var fullContent = '';
-
-  for (var i = 0; i < lines.length; i++) {
-    var line = lines[i].trim();
-    if (!line) continue;
-
-    try {
-      var obj = JSON.parse(line);
-      if (obj.type === 'item' && obj.content) {
-        fullContent += obj.content;
-      }
-      if (obj.output) return obj.output;
-      if (obj.text) return obj.text;
-      if (obj.message && typeof obj.message === 'string') return obj.message;
-    } catch (e) {
-      // ligne non-JSON ignorée
-    }
+  try {
+    var data = JSON.parse(rawText);
+    return data.reply || data.output || data.text || '';
+  } catch(e) {
+    return rawText;
+  }
+}
   }
 
   if (fullContent) return fullContent;
