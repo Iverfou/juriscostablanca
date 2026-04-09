@@ -1,6 +1,10 @@
 // ===== JURIS COSTA BLANCA — WIDGET CHAT IA =====
 const N8N_WEBHOOK_URL = 'https://kenzel2122.app.n8n.cloud/webhook/65aecf7f-612d-4315-a5a2-1b5edf06b6e0';
-const SESSION_ID = 'session_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+let SESSION_ID = localStorage.getItem('jcb_session_id');
+if (!SESSION_ID) {
+  SESSION_ID = 'session_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+  localStorage.setItem('jcb_session_id', SESSION_ID);
+}
 
 const welcomeMessages = {
   es: "¡Hola! Soy el asistente jurídico de Juris Costa Blanca. Puedo ayudarle con preguntas sobre inmigración, residencia, NIE, regularización 2026 y mucho más. ¿En qué puedo ayudarle hoy?",
