@@ -549,6 +549,19 @@
         </div>
 
         <div class="form-group">
+          <label>Langue préférée</label>
+          <select id="client-langue">
+            <option value="Français">Français 🇫🇷</option>
+            <option value="Español">Español 🇪🇸</option>
+            <option value="English">English 🇬🇧</option>
+            <option value="العربية">العربية 🇩🇿</option>
+            <option value="Русский">Русский 🇷🇺</option>
+            <option value="Українська">Українська 🇺🇦</option>
+            <option value="中文">中文 🇨🇳</option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label>Type de document *</label>
           <select id="doc-type" required>
             <option value="">— Sélectionner le type de document —</option>
@@ -803,6 +816,7 @@
             pays: pays,
             type_document: docType,
             type_dossier: document.getElementById('dossier-type').value,
+            langue: document.getElementById('client-langue').value,
             fichier_nom: selectedFile.name,
             fichier_type: selectedFile.type,
             fichier_base64: base64
