@@ -15,25 +15,41 @@ const suggestionLabels = {
 const welcomeMessages = {
   es: "¡Hola! Soy el asistente jurídico de Juris Costa Blanca. Puedo ayudarle con preguntas sobre inmigración, residencia, NIE, regularización 2026 y mucho más. ¿En qué puedo ayudarle hoy?",
   en: "Hello! I'm the legal assistant of Juris Costa Blanca. I can help you with questions about immigration, residence, NIE, 2026 regularization and much more. How can I help you today?",
-  fr: "Bonjour ! Je suis l'assistant juridique de Juris Costa Blanca. Je peux vous aider avec vos questions sur l'immigration, la résidence, le NIE, la régularisation 2026 et bien plus. Comment puis-je vous aider ?"
+  fr: "Bonjour ! Je suis l'assistant juridique de Juris Costa Blanca. Je peux vous aider avec vos questions sur l'immigration, la résidence, le NIE, la régularisation 2026 et bien plus. Comment puis-je vous aider ?",
+  ar: "مرحباً! أنا المساعد القانوني لـ Juris Costa Blanca. يمكنني مساعدتك في أسئلة الهجرة، الإقامة، NIE، التسوية 2026 والمزيد. كيف يمكنني مساعدتك اليوم؟",
+  ru: "Здравствуйте! Я юридический ИИ-ассистент Juris Costa Blanca. Я помогу вам с вопросами об иммиграции, проживании, NIE, легализации 2026 и многом другом. Чем могу помочь?",
+  zh: "您好！我是Juris Costa Blanca的法律AI助手。我可以帮助您解答有关移民、居留、NIE、2026年合法化等问题。今天有什么可以帮您的？",
+  uk: "Вітаю! Я юридичний ШІ-асистент Juris Costa Blanca. Допоможу вам з питаннями щодо імміграції, проживання, NIE, легалізації 2026 та багато іншого. Чим можу допомогти?"
 };
 
 const placeholders = {
   es: "Escriba su pregunta...",
   en: "Type your question...",
-  fr: "Écrivez votre question..."
+  fr: "Écrivez votre question...",
+  ar: "اكتب سؤالك...",
+  ru: "Введите ваш вопрос...",
+  zh: "请输入您的问题...",
+  uk: "Введіть ваше запитання..."
 };
 
 const chatTitles = {
   es: "Asistente Jurídico IA",
   en: "Legal AI Assistant",
-  fr: "Assistant Juridique IA"
+  fr: "Assistant Juridique IA",
+  ar: "المساعد القانوني الذكي",
+  ru: "Юридический ИИ-ассистент",
+  zh: "法律AI助手",
+  uk: "Юридичний ШІ-асистент"
 };
 
 const chatSubtitles = {
   es: "Responde en 7 idiomas · 24h/24",
   en: "Answers in 7 languages · 24/7",
-  fr: "Répond en 7 langues · 24h/24"
+  fr: "Répond en 7 langues · 24h/24",
+  ar: "يجيب بـ 7 لغات · 24/7",
+  ru: "Отвечает на 7 языках · 24/7",
+  zh: "支持7种语言 · 24/7",
+  uk: "Відповідає 7 мовами · 24/7"
 };
 
 function createChatWidget() {
@@ -70,9 +86,9 @@ function createChatWidget() {
       <div id="jcb-chat-messages"></div>
 
       <div id="jcb-chat-suggestions">
-        <button class="jcb-suggestion" data-es="¿Qué es la regularización 2026?" data-en="What is the 2026 regularization?" data-fr="C'est quoi la régularisation 2026 ?">📋 Regularización 2026</button>
-        <button class="jcb-suggestion" data-es="¿Cómo obtener el NIE?" data-en="How to get the NIE?" data-fr="Comment obtenir le NIE ?">🪪 NIE / TIE</button>
-        <button class="jcb-suggestion" data-es="Quiero pedir una cita" data-en="I want to book an appointment" data-fr="Je veux prendre un rendez-vous">📅 Rendez-vous</button>
+        <button class="jcb-suggestion" data-es="¿Qué es la regularización 2026?" data-en="What is the 2026 regularization?" data-fr="C'est quoi la régularisation 2026 ?" data-ar="ما هي تسوية 2026؟" data-ru="Что такое легализация 2026?" data-zh="什么是2026年合法化？" data-uk="Що таке легалізація 2026?">📋 Regularización 2026</button>
+        <button class="jcb-suggestion" data-es="¿Cómo obtener el NIE?" data-en="How to get the NIE?" data-fr="Comment obtenir le NIE ?" data-ar="كيف أحصل على NIE؟" data-ru="Как получить NIE?" data-zh="如何获得NIE？" data-uk="Як отримати NIE?">🪪 NIE / TIE</button>
+        <button class="jcb-suggestion" data-es="Quiero pedir una cita" data-en="I want to book an appointment" data-fr="Je veux prendre un rendez-vous" data-ar="أريد حجز موعد" data-ru="Хочу записаться на приём" data-zh="我想预约" data-uk="Хочу записатися на прийом">📅 Rendez-vous</button>
       </div>
 
       <div id="jcb-chat-input-area">
@@ -236,9 +252,15 @@ function hideTyping() {
 }
 
 function parseN8NResponse(rawText) {
+  console.log('N8N raw response:', rawText);
   try {
-    var data = JSON.parse(rawText);
-    return data.reply || data.output || data.text || data.message || '';
+    var parsed = JSON.parse(rawText);
+    console.log('N8N parsed:', parsed);
+    if (Array.isArray(parsed)) {
+      var item = parsed[0];
+      return item.output || item.reply || item.text || item.message || item.response || '';
+    }
+    return parsed.output || parsed.reply || parsed.text || parsed.message || parsed.response || '';
   } catch(e) {
     return rawText;
   }
@@ -278,7 +300,11 @@ async function sendMessage() {
       var emptyMessages = {
         es: "Lo siento, no pude procesar su solicitud. Por favor, inténtelo de nuevo.",
         en: "Sorry, I couldn't process your request. Please try again.",
-        fr: "Désolé, je n'ai pas pu traiter votre demande. Veuillez réessayer."
+        fr: "Désolé, je n'ai pas pu traiter votre demande. Veuillez réessayer.",
+        ar: "عذراً، لم أتمكن من معالجة طلبك. يرجى المحاولة مجدداً.",
+        ru: "Извините, не удалось обработать ваш запрос. Пожалуйста, попробуйте ещё раз.",
+        zh: "抱歉，无法处理您的请求。请再试一次。",
+        uk: "Вибачте, не вдалося обробити ваш запит. Будь ласка, спробуйте ще раз."
       };
       botReply = emptyMessages[window.currentLang || 'es'];
     }
@@ -292,7 +318,11 @@ async function sendMessage() {
     var errorMessages = {
       es: "Lo siento, hay un problema de conexión. Por favor, inténtelo de nuevo o contáctenos por WhatsApp.",
       en: "Sorry, there's a connection issue. Please try again or contact us via WhatsApp.",
-      fr: "Désolé, il y a un problème de connexion. Veuillez réessayer ou nous contacter par WhatsApp."
+      fr: "Désolé, il y a un problème de connexion. Veuillez réessayer ou nous contacter par WhatsApp.",
+      ar: "عذراً، هناك مشكلة في الاتصال. يرجى المحاولة مجدداً أو التواصل معنا عبر واتساب.",
+      ru: "Извините, проблема с подключением. Попробуйте ещё раз или свяжитесь с нами через WhatsApp.",
+      zh: "抱歉，连接出现问题。请重试或通过WhatsApp联系我们。",
+      uk: "Вибачте, проблема з підключенням. Спробуйте ще раз або зв'яжіться з нами через WhatsApp."
     };
     addMessage(errorMessages[lang] || errorMessages.es, 'bot');
   }
