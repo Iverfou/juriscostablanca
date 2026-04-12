@@ -1,10 +1,16 @@
 // ===== JURIS COSTA BLANCA — WIDGET CHAT IA =====
 const N8N_WEBHOOK_URL = 'https://kenzel2122.app.n8n.cloud/webhook/65aecf7f-612d-4315-a5a2-1b5edf06b6e0';
-let SESSION_ID = localStorage.getItem('jcb_session_id');
-if (!SESSION_ID) {
-  SESSION_ID = 'session_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
-  localStorage.setItem('jcb_session_id', SESSION_ID);
-}
+const SESSION_ID = 'session_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+
+const suggestionLabels = {
+  es: ['📋 Regularización 2026', '🪪 NIE / TIE', '📅 Cita previa'],
+  en: ['📋 2026 Regularization', '🪪 NIE / TIE', '📅 Book appointment'],
+  fr: ['📋 Régularisation 2026', '🪪 NIE / TIE', '📅 Rendez-vous'],
+  ar: ['📋 تسوية 2026', '🪪 NIE / TIE', '📅 حجز موعد'],
+  ru: ['📋 Легализация 2026', '🪪 NIE / TIE', '📅 Запись на приём'],
+  uk: ['📋 Легалізація 2026', '🪪 NIE / TIE', '📅 Запис на прийом'],
+  zh: ['📋 2026年正规化', '🪪 NIE / TIE', '📅 预约']
+};
 
 const welcomeMessages = {
   es: "¡Hola! Soy el asistente jurídico de Juris Costa Blanca. Puedo ayudarle con preguntas sobre inmigración, residencia, NIE, regularización 2026 y mucho más. ¿En qué puedo ayudarle hoy?",
@@ -183,12 +189,21 @@ function initChatEvents() {
   });
 }
 
+function updateSuggestions(lang) {
+  var labels = suggestionLabels[lang] || suggestionLabels.es;
+  var btns = document.querySelectorAll('.jcb-suggestion');
+  btns.forEach(function(btn, i) {
+    if (labels[i]) btn.textContent = labels[i];
+  });
+}
+
 function showWelcomeMessage() {
   var lang = window.currentLang || 'es';
   var msg = welcomeMessages[lang] || welcomeMessages.es;
   var messages = document.getElementById('jcb-chat-messages');
   if (messages) messages.innerHTML = '';
   addMessage(msg, 'bot');
+  updateSuggestions(lang);
 }
 
 function addMessage(text, type) {
@@ -260,7 +275,12 @@ async function sendMessage() {
     var botReply = parseN8NResponse(rawText);
 
     if (!botReply || botReply.trim() === '') {
-      botReply = welcomeMessages[window.currentLang || 'es'];
+      var emptyMessages = {
+        es: "Lo siento, no pude procesar su solicitud. Por favor, inténtelo de nuevo.",
+        en: "Sorry, I couldn't process your request. Please try again.",
+        fr: "Désolé, je n'ai pas pu traiter votre demande. Veuillez réessayer."
+      };
+      botReply = emptyMessages[window.currentLang || 'es'];
     }
 
     addMessage(botReply, 'bot');
