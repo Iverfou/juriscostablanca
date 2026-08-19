@@ -41,13 +41,55 @@
       50%    { opacity:.3; transform:scale(.65); }
     }
 
-    /* ---------- Tablette / mobile : plus de chevauchement ---------- */
+    /* ---------- Photo Alicante dans le hero ---------- */
+    #accueil{ position:relative; overflow:hidden; }
+
+    .hero-photo{
+      position:absolute; top:0; right:0; bottom:0;
+      width:min(56%, 1020px);
+      z-index:1; pointer-events:none;
+      background-image:url("assets/alicante-puerto.jpg");
+      background-size:cover;
+      background-position:center 42%;
+      -webkit-mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.3) 16%, #000 44%);
+              mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.3) 16%, #000 44%);
+    }
+    .hero-photo::after{
+      content:""; position:absolute; inset:0;
+      background:
+        linear-gradient(to right,  rgba(13,37,71,.88) 0%, rgba(13,37,71,.30) 38%, rgba(13,37,71,.08) 100%),
+        linear-gradient(to bottom, rgba(10,28,55,.55) 0%, rgba(10,28,55,0) 26%, rgba(10,28,55,.72) 100%);
+    }
+
+    /* le contenu repasse devant la photo */
+    #accueil .hero-content{ position:relative; z-index:2; }
+    #accueil .hero-stats{
+      position:relative; z-index:3;
+      text-shadow:0 2px 18px rgba(5,15,34,.9);
+    }
+    #accueil .hero-scroll{ position:relative; z-index:3; }
+
+    /* ---------- Tablette / mobile ---------- */
     @media (max-width:1100px){
       nav{ flex-wrap:nowrap; gap:10px; }
       .nav-logo-sub{ display:none; }
       .nav-call-label{ display:none; }
       .nav-call-btn{ padding:8px 11px; }
       .nav-left{ gap:16px; }
+    }
+    @media (max-width:900px){
+      /* la photo passe sous le texte, en bandeau bas de hero */
+      .hero-photo{
+        top:auto; bottom:0; left:0; right:0;
+        width:100%; height:40%;
+        background-position:center 45%;
+        -webkit-mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.4) 24%, #000 55%);
+                mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.4) 24%, #000 55%);
+      }
+      .hero-photo::after{
+        background:
+          linear-gradient(to bottom, rgba(10,28,55,.85) 0%, rgba(10,28,55,.25) 45%, rgba(10,28,55,.8) 100%);
+      }
     }
     @media (max-width:820px){
       .nav-logo-name{ font-size:15px; white-space:nowrap; }
@@ -61,45 +103,7 @@
     @media (max-width:420px){
       .nav-left{ gap:10px; }
       .lang-selector{ max-width:96px; }
-    }
-
-    /* ---------- Bande Alicante ---------- */
-    .alicante-band{
-      position:relative; width:100%;
-      height:clamp(360px, 48vw, 580px);
-      overflow:hidden; display:flex; align-items:center; justify-content:center;
-      background:linear-gradient(160deg,#0d2547 0%,#16386b 55%,#0d2547 100%);
-    }
-    .alicante-img{
-      position:absolute; inset:0; width:100%; height:100%;
-      object-fit:cover; object-position:center 38%;
-    }
-    .alicante-overlay{
-      position:absolute; inset:0;
-      background:
-        linear-gradient(to bottom, rgba(10,28,55,.58) 0%, rgba(10,28,55,.22) 42%, rgba(10,28,55,.74) 100%),
-        radial-gradient(ellipse at 50% 60%, rgba(201,169,110,.12) 0%, transparent 62%);
-    }
-    .alicante-content{
-      position:relative; text-align:center; color:#fff;
-      text-shadow:0 2px 24px rgba(5,15,34,.75);
-      padding:0 24px; max-width:720px;
-    }
-    .alicante-eyebrow{
-      display:flex; align-items:center; justify-content:center; gap:16px;
-      margin-bottom:18px; color:#c9a96e;
-      font-size:12px; letter-spacing:.32em; text-transform:uppercase;
-    }
-    .alicante-line{ width:44px; height:1px; background:#c9a96e; opacity:.75; }
-    .alicante-title{
-      margin:0 0 16px; font-size:clamp(30px, 5.2vw, 58px);
-      font-weight:400; line-height:1.15;
-    }
-    .alicante-title em{ color:#c9a96e; font-style:italic; }
-    .alicante-text{
-      margin:0 auto; max-width:560px;
-      font-size:clamp(14px, 1.6vw, 17px); line-height:1.7;
-      color:rgba(255,255,255,.86);
+      .hero-photo{ height:32%; }
     }
   </style>
 </head>
@@ -154,6 +158,8 @@
   <section id="accueil">
     <div class="hero-bg-pattern"></div>
     <div class="hero-lines"></div>
+    <div class="hero-photo" role="img"
+         aria-label="Puerto de Alicante al anochecer con el castillo de Santa Bárbara"></div>
 
     <div class="hero-content">
       <div class="hero-eyebrow">
@@ -221,26 +227,6 @@
     <div class="langue-sep">·</div>
     <div class="langue-item"><span class="langue-flag">🇷🇺</span> Русский</div>
   </div>
-
-  <!-- BANDE ALICANTE -->
-  <section class="alicante-band" id="alicante">
-    <img class="alicante-img" src="assets/alicante-puerto.jpg"
-         alt="Puerto de Alicante al anochecer con el castillo de Santa Bárbara al fondo"
-         loading="lazy" onerror="this.remove()">
-    <div class="alicante-overlay"></div>
-    <div class="alicante-content">
-      <div class="alicante-eyebrow">
-        <span class="alicante-line"></span>
-        <span id="alicanteEyebrow">Alicante</span>
-        <span class="alicante-line"></span>
-      </div>
-      <h2 class="alicante-title" id="alicanteTitle">Tu nuevo <em>destino</em></h2>
-      <p class="alicante-text" id="alicanteText">
-        300 días de sol al año, el Mediterráneo a tus pies y una de las mejores
-        calidades de vida de Europa. Del papeleo nos ocupamos nosotros.
-      </p>
-    </div>
-  </section>
 
   <!-- NOTRE BUREAU -->
   <section id="bureau">
@@ -588,40 +574,15 @@
       zh:{idle:"致电", wait:"连接中", live:"挂断"}
     };
 
-    const BAND_L = {
-      es:{e:"Alicante", t:"Tu nuevo <em>destino</em>",
-          p:"300 días de sol al año, el Mediterráneo a tus pies y una de las mejores calidades de vida de Europa. Del papeleo nos ocupamos nosotros."},
-      en:{e:"Alicante", t:"Your new <em>destination</em>",
-          p:"300 days of sunshine a year, the Mediterranean at your doorstep and one of the best qualities of life in Europe. Leave the paperwork to us."},
-      fr:{e:"Alicante", t:"Votre nouvelle <em>destination</em>",
-          p:"300 jours de soleil par an, la Méditerranée à vos pieds et l’une des meilleures qualités de vie d’Europe. Les démarches, c’est notre affaire."},
-      ar:{e:"أليكانتي", t:"وجهتك <em>الجديدة</em>",
-          p:"300 يوم مشمس في السنة، والبحر المتوسط أمامك، وواحدة من أفضل مستويات المعيشة في أوروبا. نحن نتولى الإجراءات."},
-      ru:{e:"Аликанте", t:"Ваш новый <em>дом</em>",
-          p:"300 солнечных дней в году, Средиземное море рядом и одно из лучших качеств жизни в Европе. Бумажные дела мы берём на себя."},
-      uk:{e:"Аліканте", t:"Ваш новий <em>дім</em>",
-          p:"300 сонячних днів на рік, Середземне море поруч і одна з найкращих якостей життя в Європі. Документи — наша справа."},
-      zh:{e:"阿利坑特", t:"您的新<em>目的地</em>",
-          p:"每年300天阳光，地中海近在咫尺，享有欧洲最优质的生活之一。手续交给我们。"}
-    };
-
     const btn   = document.getElementById("vapiCallBtn");
     const label = btn.querySelector(".nav-call-label");
-    const bE = document.getElementById("alicanteEyebrow");
-    const bT = document.getElementById("alicanteTitle");
-    const bP = document.getElementById("alicanteText");
     let state = "idle";
 
     const lang = () => (window.currentLang || document.documentElement.lang || "es").slice(0,2);
 
     function paint(){
-      const l = lang();
-      label.textContent = (BTN_L[l] || BTN_L.es)[state];
+      label.textContent = (BTN_L[lang()] || BTN_L.es)[state];
       btn.dataset.state = state;
-      const b = BAND_L[l] || BAND_L.es;
-      if (bE) bE.textContent = b.e;
-      if (bT) bT.innerHTML   = b.t;
-      if (bP) bP.textContent = b.p;
     }
     paint();
 
