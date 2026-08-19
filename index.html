@@ -7,6 +7,40 @@
   <meta name="description" content="Gestoría jurídica especializada en inmigración internacional. Servicios en español, inglés, francés, árabe, chino, ucraniano y ruso. Alicante, España." />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>" />
+
+  <style>
+    /* --- Bouton appel vocal (nav) --- */
+    .nav-call-btn{
+      display:inline-flex; align-items:center; gap:9px;
+      margin:0 auto 0 32px; padding:9px 18px;
+      border:1px solid #c9a96e; border-radius:999px;
+      background:transparent; color:#c9a96e;
+      font:inherit; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+      cursor:pointer; white-space:nowrap;
+      transition:background .25s ease, color .25s ease, border-color .25s ease;
+    }
+    .nav-call-btn:hover{ background:#c9a96e; color:#fff; }
+    .nav-call-btn svg{ width:15px; height:15px; flex:none; }
+    .nav-call-dot{
+      width:7px; height:7px; border-radius:50%; background:#c9a96e; flex:none;
+    }
+    .nav-call-btn:hover .nav-call-dot{ background:#fff; }
+    .nav-call-btn[data-state="wait"]{ opacity:.65; cursor:progress; }
+    .nav-call-btn[data-state="live"]{
+      background:#c0392b; border-color:#c0392b; color:#fff;
+    }
+    .nav-call-btn[data-state="live"] .nav-call-dot{
+      background:#fff; animation:vapiPulse 1.1s ease-in-out infinite;
+    }
+    @keyframes vapiPulse{
+      0%,100%{ opacity:1; transform:scale(1); }
+      50%    { opacity:.3; transform:scale(.65); }
+    }
+    @media (max-width:1100px){
+      .nav-call-btn{ margin-left:18px; padding:8px 12px; }
+      .nav-call-label{ display:none; }
+    }
+  </style>
 </head>
 <body>
 
@@ -19,6 +53,17 @@
         <span class="nav-logo-sub">Gestoría Jurídica · Alicante</span>
       </div>
     </a>
+
+    <button id="vapiCallBtn" class="nav-call-btn" type="button" data-state="idle"
+            aria-label="Llamar al despacho">
+      <span class="nav-call-dot"></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6
+                 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+      <span class="nav-call-label">Llamar</span>
+    </button>
 
     <ul class="nav-links" id="navLinks">
       <li><a href="#accueil" data-i18n="nav_accueil">Inicio</a></li>
@@ -445,46 +490,54 @@
   <script src="chat.js"></script>
 
   <!-- ASSISTANT VOCAL VAPI -->
-  <script>
-    (function (d, t) {
-      var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
-      g.src = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
-      g.defer = true; g.async = true;
-      s.parentNode.insertBefore(g, s);
-      g.onload = function () {
-        window.vapiInstance = window.vapiSDK.run({
-          apiKey: "6133b0e1-048a-4e2e-9d2d-cc537dc33377",
-          assistant: "979ed498-cce9-49c5-ba93-b4385dd773e6",
-          config: {
-            position: "bottom-left",
-            offset: "40px",
-            width: "56px",
-            height: "56px",
-            idle: {
-              color: "#c9a96e",
-              type: "pill",
-              title: "Llamar al despacho",
-              subtitle: "Asistente IA 24/7",
-              icon: "https://unpkg.com/lucide-static@0.321.0/icons/phone.svg"
-            },
-            loading: {
-              color: "#c9a96e",
-              type: "pill",
-              title: "Conectando...",
-              subtitle: "Un momento",
-              icon: "https://unpkg.com/lucide-static@0.321.0/icons/loader-2.svg"
-            },
-            active: {
-              color: "#1a1a1a",
-              type: "pill",
-              title: "En llamada",
-              subtitle: "Pulse para colgar",
-              icon: "https://unpkg.com/lucide-static@0.321.0/icons/phone-off.svg"
-            }
-          }
-        });
-      };
-    })(document, "script");
+  <script type="module">
+    import Vapi from "https://esm.sh/@vapi-ai/web@2";
+
+    const PUBLIC_KEY   = "6133b0e1-048a-4e2e-9d2d-cc537dc33377";
+    const ASSISTANT_ID = "979ed498-cce9-49c5-ba93-b4385dd773e6";
+
+    const L = {
+      es:{idle:"Llamar",     wait:"Conectando",  live:"Colgar"},
+      en:{idle:"Call us",    wait:"Connecting",  live:"Hang up"},
+      fr:{idle:"Appeler",    wait:"Connexion",   live:"Raccrocher"},
+      ar:{idle:"اتصل بنا",   wait:"جارٍ الاتصال", live:"إنهاء"},
+      ru:{idle:"Позвонить",  wait:"Соединение",  live:"Завершить"},
+      uk:{idle:"Подзвонити", wait:"З’єднання",   live:"Завершити"},
+      zh:{idle:"致电",        wait:"连接中",       live:"挂断"}
+    };
+
+    const btn   = document.getElementById("vapiCallBtn");
+    const label = btn.querySelector(".nav-call-label");
+    let state = "idle";
+
+    const lang  = () => (window.currentLang || document.documentElement.lang || "es").slice(0,2);
+    const paint = () => {
+      label.textContent = (L[lang()] || L.es)[state];
+      btn.dataset.state = state;
+    };
+    paint();
+
+    // suit le selecteur de langue du site
+    document.querySelectorAll(".lang-btn").forEach(b =>
+      b.addEventListener("click", () => setTimeout(paint, 60))
+    );
+
+    const vapi = new Vapi(PUBLIC_KEY);
+    vapi.on("call-start", () => { state = "live"; paint(); });
+    vapi.on("call-end",   () => { state = "idle"; paint(); });
+    vapi.on("error", e => { console.error("[VAPI]", e); state = "idle"; paint(); });
+
+    btn.addEventListener("click", async () => {
+      if (state === "live") { vapi.stop(); return; }
+      if (state === "wait") return;
+      state = "wait"; paint();
+      try {
+        await vapi.start(ASSISTANT_ID);
+      } catch (e) {
+        console.error("[VAPI] impossible de demarrer l'appel", e);
+        state = "idle"; paint();
+      }
+    });
   </script>
 
 </body>
