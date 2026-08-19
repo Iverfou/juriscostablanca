@@ -443,5 +443,49 @@
 
   <script src="main.js"></script>
   <script src="chat.js"></script>
+
+  <!-- ASSISTANT VOCAL VAPI -->
+  <script>
+    (function (d, t) {
+      var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      g.src = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
+      g.defer = true; g.async = true;
+      s.parentNode.insertBefore(g, s);
+      g.onload = function () {
+        window.vapiInstance = window.vapiSDK.run({
+          apiKey: "6133b0e1-048a-4e2e-9d2d-cc537dc33377",
+          assistant: "979ed498-cce9-49c5-ba93-b4385dd773e6",
+          config: {
+            position: "bottom-left",
+            offset: "40px",
+            width: "56px",
+            height: "56px",
+            idle: {
+              color: "#c9a96e",
+              type: "pill",
+              title: "Llamar al despacho",
+              subtitle: "Asistente IA 24/7",
+              icon: "https://unpkg.com/lucide-static@0.321.0/icons/phone.svg"
+            },
+            loading: {
+              color: "#c9a96e",
+              type: "pill",
+              title: "Conectando...",
+              subtitle: "Un momento",
+              icon: "https://unpkg.com/lucide-static@0.321.0/icons/loader-2.svg"
+            },
+            active: {
+              color: "#1a1a1a",
+              type: "pill",
+              title: "En llamada",
+              subtitle: "Pulse para colgar",
+              icon: "https://unpkg.com/lucide-static@0.321.0/icons/phone-off.svg"
+            }
+          }
+        });
+      };
+    })(document, "script");
+  </script>
+
 </body>
 </html>
